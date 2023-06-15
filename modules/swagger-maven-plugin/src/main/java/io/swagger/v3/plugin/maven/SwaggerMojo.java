@@ -83,6 +83,11 @@ public class SwaggerMojo extends AbstractMojo {
             OpenApiContext context = builder.buildContext(true);
             OpenAPI openAPI = context.read();
 
+            Optional.of(openAPI)
+                    .map(OpenAPI::getInfo)
+                    .filter(info -> StringUtils.isBlank(info.getVersion()))
+                    .ifPresent(info -> info.setVersion(project.getVersion()));
+
             if (StringUtils.isNotBlank(config.getFilterClass())) {
                 try {
                     OpenAPISpecFilter filterImpl = (OpenAPISpecFilter) this.getClass().getClassLoader().loadClass(config.getFilterClass()).newInstance();
