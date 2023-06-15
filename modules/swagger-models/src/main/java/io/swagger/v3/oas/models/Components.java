@@ -68,7 +68,7 @@ public class Components {
         if (this.schemas == null) {
             this.schemas = new LinkedHashMap<>();
         }
-        this.schemas.put(key, schemasItem);
+        this.schemas.put(key, schemasItem.description(null));
         return this;
     }
 
