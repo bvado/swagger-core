@@ -57,7 +57,9 @@ public class ModelConverterContextImpl implements ModelConverterContext {
         if (LOGGER.isTraceEnabled()) {
             LOGGER.trace(String.format("defineModel %s %s", name, model));
         }
-        modelByName.put(name, model);
+        if (!modelByName.containsKey(name)) {
+            modelByName.put(name, model);
+        }
 
         if (StringUtils.isNotBlank(prevName) && !prevName.equals(name)) {
             modelByName.remove(prevName);
@@ -102,6 +104,7 @@ public class ModelConverterContextImpl implements ModelConverterContext {
             Schema resolvedImpl = resolved;
             if (resolvedImpl.getName() != null) {
                 modelByName.put(resolvedImpl.getName(), resolved);
+//                modelByName.put(resolvedImpl.getName(), new Schema().$ref(resolved.get$ref()));
             }
         } else {
             processedTypes.remove(type);
