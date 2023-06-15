@@ -1823,7 +1823,7 @@ public abstract class AnnotationsUtils {
         }
 
         else if (tS != null && cS != null) {
-            return mergeSchemaAnnotations(tS, cS);
+            return mergeSchemaAnnotations(cS, tS); // we want to be able to override the description of the class itself
         }
 
         else {
