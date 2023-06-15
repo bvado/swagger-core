@@ -2007,8 +2007,12 @@ public abstract class AnnotationsUtils {
 
             @Override
             public String description() {
-                if (StringUtils.isNotBlank(master.description()) || StringUtils.isBlank(patch.description())) {
-                    return master.description();
+                if (StringUtils.isNotBlank(master.description())) {
+                    if (StringUtils.isBlank(patch.description())) {
+                        return master.description();
+                    } else {
+                        return master.description() + "\n\n" + patch.description();
+                    }
                 }
                 return patch.description();
             }
