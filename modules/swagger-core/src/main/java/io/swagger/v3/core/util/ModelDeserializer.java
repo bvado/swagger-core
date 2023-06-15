@@ -88,7 +88,11 @@ public class ModelDeserializer extends JsonDeserializer<Schema> {
                 schema = deserializeObjectSchema(node);
             }
         } else if (node.get("$ref") != null) {
-            schema = new Schema().$ref(node.get("$ref").asText());
+            final JsonNode description = node.get("description");
+            schema = new Schema()
+                    .$ref(node.get("$ref").asText())
+                    .description(description != null ? description.asText() : null)
+            ;
         } else { // assume object
             schema = deserializeObjectSchema(node);
         }

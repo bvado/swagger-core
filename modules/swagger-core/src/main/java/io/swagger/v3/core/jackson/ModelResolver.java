@@ -704,7 +704,10 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
                                 property = new Schema().$ref(constructRef(pName));
                             }
                         } else if (property.get$ref() != null) {
-                            property = new Schema().$ref(StringUtils.isNotEmpty(property.get$ref()) ? property.get$ref() : property.getName());
+                            property = new Schema()
+                                    .$ref(StringUtils.isNotEmpty(property.get$ref()) ? property.get$ref() : property.getName())
+                                    .description(property.getDescription())
+                            ;
                         }
                     }
                     property.setName(propName);
@@ -909,10 +912,14 @@ public class ModelResolver extends AbstractModelConverter implements ModelConver
             StringUtils.isNotBlank(model.getName()))
         {
             if (context.getDefinedModels().containsKey(model.getName())) {
-                model = new Schema().$ref(constructRef(model.getName()));
+                model = new Schema()
+                        .$ref(constructRef(model.getName()))
+                        .description(model.getDescription());
             }
         } else if (model != null && model.get$ref() != null) {
-            model = new Schema().$ref(StringUtils.isNotEmpty(model.get$ref()) ? model.get$ref() : model.getName());
+            model = new Schema()
+                    .$ref(StringUtils.isNotEmpty(model.get$ref()) ? model.get$ref() : model.getName())
+                    .description(model.getDescription());
         }
 
         if (model != null && resolvedArrayAnnotation != null) {

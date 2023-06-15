@@ -43,8 +43,14 @@ public class SchemaSerializer extends JsonSerializer<Schema> implements Resolvab
 
         } else {
             // handle ref schema serialization skipping all other props
+            // except `description` if it exists
+            // see https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md#reference-object
             jgen.writeStartObject();
             jgen.writeStringField("$ref", value.get$ref());
+            final String description = value.getDescription();
+            if (StringUtils.isNotBlank(description)) {
+                jgen.writeStringField("description", description);
+            }
             jgen.writeEndObject();
         }
     }
