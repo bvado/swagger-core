@@ -14,13 +14,10 @@
         <url>https://github.com/swagger-api/swagger-core</url>
     </scm>
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>thirdparty</id>
+            <url>https://repository.ubenchinternational.com/nexus/repository/thirdparty</url>
+            <uniqueVersion>false</uniqueVersion>
         </repository>
     </distributionManagement>
     <prerequisites>
@@ -209,9 +206,9 @@
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     <stagingProgressTimeoutMinutes>30</stagingProgressTimeoutMinutes>
-<!--                    <skipStaging>true</skipStaging>
+                    <skipStaging>true</skipStaging>
                     <skipRemoteStaging>true</skipRemoteStaging>
-                    <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>-->
+                    <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
                 </configuration>
             </plugin>
         </plugins>

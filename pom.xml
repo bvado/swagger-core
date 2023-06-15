@@ -14,13 +14,10 @@
         <url>https://github.com/swagger-api/swagger-core</url>
     </scm>
     <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
         <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+            <id>ubench-thirdparty</id>
+            <url>https://repository.ubenchinternational.com/nexus/repository/thirdparty</url>
+            <uniqueVersion>false</uniqueVersion>
         </repository>
     </distributionManagement>
     <prerequisites>
@@ -212,14 +209,23 @@
                 <artifactId>nexus-staging-maven-plugin</artifactId>
                 <version>1.6.13</version>
                 <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <serverId>ubench-thirdparty</serverId>
+                    <nexusUrl>https://repository.ubenchinternational.com/nexus/repository/thirdparty</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                     <stagingProgressTimeoutMinutes>30</stagingProgressTimeoutMinutes>
-<!--                    <skipStaging>true</skipStaging>
+                    <skipStaging>true</skipStaging>
                     <skipRemoteStaging>true</skipRemoteStaging>
-                    <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>-->
+                    <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
                 </configuration>
             </plugin>
 <!-- TODO replace custom plugin with Eclipse's when attachment of transformed JAR supports being optional.
